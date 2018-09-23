@@ -26,7 +26,7 @@ class BeautyBattle extends React.Component {
               <Avatar size={80} />
               <Button onClick={this.props.handle}>Handle</Button>
             </ListItem>
-            <ListItem>lolo</ListItem>
+            <ListItem>friends - {this.props.friends}</ListItem>
           </Group>
           <Group title={'Рейтинг'}>
             <ListItem>

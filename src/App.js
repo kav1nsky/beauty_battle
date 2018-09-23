@@ -16,6 +16,7 @@ class App extends React.Component {
 			activePanel: 'bb',
 			fetchedUser: null,
       token: null,
+			friends: null,
 		};
 	}
 
@@ -24,7 +25,7 @@ class App extends React.Component {
     // VKConnect.send("VKWebAppCallAPIMethod", {"method": "friends.get",
     //   "params": {"access_token":this.props.token, "v":"5.85"}});
 		VKConnect.send("VKWebAppCallAPIMethod",
-				{"method": "friends.get", "params": {"v":"5.85", "access_token":this.state.token, "fields": "city"}});
+				{"method": "friends.get", "params": {"v":"5.85", "access_token":this.state.token, "fields": "city", "count": 1}});
   }
 
 	componentDidMount() {
@@ -37,9 +38,12 @@ class App extends React.Component {
         case 'VKWebAppAccessTokenReceived':
           this.setState({token: e.detail.data.access_token});
           break;
+				case 'VKWebAppCallAPIMethodResult':
+					this.setState({friends: e.detail.data})
+					break;
 				default:
-					// console.log(e.detail.type);
-					console.log(e.detail.data);
+					console.log(e.detail.type);
+					// console.log(e.detail.data);
 			}
 		});
 		VKConnect.send('VKWebAppGetUserInfo', {});
@@ -55,7 +59,7 @@ class App extends React.Component {
 	render() {
 		return (
 			<View activePanel={this.state.activePanel}>
-				<BeautyBattle id={'bb'} token={this.state.token} handle={this.buttonClicked}/>
+				<BeautyBattle id={'bb'} token={this.state.token} friends={this.state.friends} handle={this.buttonClicked}/>
 				<Home id="home" fetchedUser={this.state.fetchedUser} go={this.go} />
 				<Persik id="persik" go={this.go} />
 			</View>
