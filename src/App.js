@@ -1,6 +1,6 @@
 import React from 'react';
-// import connect from '@vkontakte/vkui-connect';
-import VKConnect from '@vkontakte/vkui-connect-mock';
+import connect from '@vkontakte/vkui-connect';
+// import VKconnect from '@vkontakte/vkui-connect-mock';
 import { View } from '@vkontakte/vkui';
 import '@vkontakte/vkui/dist/vkui.css';
 
@@ -21,15 +21,15 @@ class App extends React.Component {
 	}
 
 	buttonClicked = () => {
-		// VKConnect.send("VKWebAppGetUserInfo", {});
-    // VKConnect.send("VKWebAppCallAPIMethod", {"method": "friends.get",
+		// connect.send("VKWebAppGetUserInfo", {});
+    // connect.send("VKWebAppCallAPIMethod", {"method": "friends.get",
     //   "params": {"access_token":this.props.token, "v":"5.85"}});
-		VKConnect.send("VKWebAppCallAPIMethod",
+		connect.send("VKWebAppCallAPIMethod",
 				{"method": "friends.get", "params": {"v":"5.85", "access_token":this.state.token, "fields": "city", "count": 1}});
   }
 
 	componentDidMount() {
-		VKConnect.subscribe((e) => {
+		connect.subscribe((e) => {
 			switch (e.detail.type) {
 				case 'VKWebAppGetUserInfoResult':
 					console.log(e.detail.data);
@@ -47,9 +47,9 @@ class App extends React.Component {
 					// console.log(e.detail.data);
 			}
 		});
-		VKConnect.send('VKWebAppGetUserInfo', {});
+		connect.send('VKWebAppGetUserInfo', {});
 
-		VKConnect.send("VKWebAppGetAuthToken", {"app_id": 6700632, "scope": "friends"});
+		connect.send("VKWebAppGetAuthToken", {"app_id": 6700632, "scope": "friends"});
 
 	}
 
