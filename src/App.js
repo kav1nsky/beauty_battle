@@ -39,7 +39,8 @@ class App extends React.Component {
           this.setState({token: e.detail.data.access_token});
           break;
 				case 'VKWebAppCallAPIMethodResult':
-					this.setState({friends: e.detail.data})
+					console.log(e.detail.data);
+					this.setState({friends: e.detail.data[0]})
 					break;
 				default:
 					console.log(e.detail.type);
