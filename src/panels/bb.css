@@ -1,0 +1,13 @@
+.my_img{
+  margin: 15px;
+}
+
+.my_img:active{
+	-webkit-box-shadow: 0 0 10px 3px rgba(0, 0, 0, 0.3);
+	-moz-box-shadow: 0 0 10px 3px rgba(0, 0, 0, 0.3);
+	box-shadow: 0 0 10px 3px rgba(0, 0, 0, 0.3);
+}
+
+.cntr{
+  text-align: center;
+}
